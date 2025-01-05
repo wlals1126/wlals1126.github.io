@@ -1,17 +1,16 @@
-import TwitterIcon from '@/components/icons/TwitterIcon'
+import LinkedinIcon from '@/components/icons/LinkedinIcon'
 import GithubIcon from '@/components/icons/GithubIcon'
 
-// ADD YOUR SOCIAL NETWORKS HERE
 export const SOCIALNETWORKS = [
 	{
 		name: 'Github',
-		url: 'https://github.com/danielcgilibert/blog-template',
+		url: 'https://github.com/wlals1126',
 		icon: GithubIcon
 	},
 
 	{
-		name: 'Twitter',
-		url: 'https://github.com/danielcgilibert/blog-template',
-		icon: TwitterIcon
+		name: 'Linkedin',
+		url: 'https://www.linkedin.com/in/jimin-yu-4990652a1',
+		icon: LinkedinIcon
 	}
 ] as const

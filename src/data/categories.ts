@@ -1,5 +1,2 @@
 // List of categories for blog posts
-export const CATEGORIES = [
-	'Tech',
-	'Algorithm',
-] as const
+export const CATEGORIES = ['Tech', 'Algorithm', 'Life'] as const

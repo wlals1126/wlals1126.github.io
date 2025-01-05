@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# wlals1126.github.io
-=======
 <div align="center">
 
 <img src="public/project.png" alt="Screenshot" />
@@ -214,4 +211,3 @@ All commands are run from the root of the project, from a terminal:
 <a href="https://github.com/danielcgilibert/blog-template/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=danielcgilibert/blog-template" />
 </a>
->>>>>>> 03d239b (initial commit)

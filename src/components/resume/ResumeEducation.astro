@@ -1,0 +1,16 @@
+---
+const { education } = Astro.props
+---
+
+<section class='mb-10'>
+	<h2 class='text-2xl font-semibold'>학력</h2>
+	<ul class='list-disc list-inside mt-4'>
+		{
+			education.map((item: any) => (
+				<li>
+					<strong>{item.school}</strong> - {item.major} ({item.period})
+				</li>
+			))
+		}
+	</ul>
+</section>

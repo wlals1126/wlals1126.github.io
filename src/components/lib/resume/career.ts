@@ -16,7 +16,6 @@ export type Team = {
 export type Project = {
 	title: string
 	description: string
-	role: Works[]
 	works: Works[]
 	techStack: TechStack[]
 }
@@ -63,7 +62,7 @@ export const CAREER: Career[] = [
 						title: '액션 카탈로그',
 						description:
 							'AI 응답 결과를 개선하기 위해 다양한 데이터 소스에 효율적으로 접근할 수 있는 시스템입니다. 통합 어드민 환경에서 프롬프트 최적화 및 사전 정의된 시나리오 구축을 통해 AI 성능과 정확도를 향상시키며, 필요한 API 리스트를 관리 및 제공합니다.',
-						role: [
+						works: [
 							{
 								description: '통합 어드민 프론트엔드 개발 담당'
 							},
@@ -77,7 +76,6 @@ export const CAREER: Career[] = [
 								description: 'VDI 환경에서 통합 어드민 메뉴 추가 및 운영 서버 연동 작업'
 							}
 						],
-						works: [],
 						techStack: [
 							'React',
 							'Typescript',
@@ -91,7 +89,7 @@ export const CAREER: Career[] = [
 						title: 'AI 에이전트',
 						description:
 							'AI-Agent는 사용자의 질문을 이해하고 적절한 답변을 제공하기 위해 설계된 대화형 시스템으로, 다양한 시나리오를 기반으로 사용자 의도를 분석하고 백엔드와 연동하여 데이터를 검색하고 처리하는 자동화된 기능을 구현한 프로젝트입니다.',
-						role: [
+						works: [
 							{
 								description: '프론트엔드',
 								subDescription: [
@@ -109,7 +107,6 @@ export const CAREER: Career[] = [
 								]
 							}
 						],
-						works: [],
 						techStack: ['Next.js', 'Tailwind CSS', 'TanStack Query']
 					}
 				]

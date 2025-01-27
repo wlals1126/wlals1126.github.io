@@ -3,14 +3,37 @@ const { education } = Astro.props
 ---
 
 <section class='mb-10'>
-	<h2 class='text-2xl font-semibold'>학력</h2>
-	<ul class='list-disc list-inside mt-4'>
+	<hr class='border-t border-gray-300 dark:border-gray-600 my-4' />
+	<ul class='mt-4'>
 		{
 			education.map((item: any) => (
-				<li>
-					<strong>{item.school}</strong> - {item.major} ({item.period})
+				<li class='mb-4'>
+					<div class='grid grid-cols-3 gap-4'>
+						<div class='col-span-1'>
+							<p class='text-lg font-semibold'>학력</p>
+						</div>
+
+						<div class='col-span-2'>
+							<div class='flex justify-between items-center'>
+								<p class='text-lg font-semibold'>{item.school}</p>
+								<p class='text-gray-600 dark:text-gray-400'>
+									{item.period}
+								</p>
+							</div>
+							<p class='text-gray-600 dark:text-gray-400'>
+								{item.major}
+							</p>
+
+							<ul class='list-disc pl-6 text-gray-600 dark:text-gray-400 mt-2'>
+								<li>C언어, Java, 컴퓨터구조, 자료구조 등 개발 기초 지식을 습득</li>
+								<li>교내 교육 봉사 동아리 DUCAMI에서 다양한 코딩 교육 진행</li>
+								<li>고교학점제 도입에 따라 Spring Boot와 Node.js를 활용한 서버 강의를 수강</li>
+							</ul>
+						</div>
+					</div>
 				</li>
 			))
 		}
 	</ul>
 </section>
+

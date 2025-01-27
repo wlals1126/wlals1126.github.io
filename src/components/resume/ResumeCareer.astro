@@ -9,11 +9,11 @@ type Props = {
 const { career }: { career: Career[] } = Astro.props
 ---
 
-<section class='mb-10'>
+<section>
 	<hr class='border-t border-gray-300 dark:border-gray-600 my-4' />
 	{
 		career.map((company) => (
-			<div class='mb-8'>
+			<div>
 				<div class='grid grid-cols-3 gap-4'>
 					<div class='col-span-1'>
 						<h3 class='text-lg font-bold text-stone-900 dark:text-white'>업무 경험</h3>

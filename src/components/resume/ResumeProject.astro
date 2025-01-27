@@ -19,38 +19,30 @@ const { projects }: { projects: Project[] } = Astro.props
 				<p class='text-gray-700 dark:text-gray-300 mt-2'>{project.description}</p>
 
 				<ul class='list-disc list-inside text-gray-600 dark:text-gray-400 mt-2'>
-					{project.role.map((role) => (
+					{project.works.map((work) => (
 						<div>
-							{role.description === '프론트엔드' && (
-								<>
-									<h6 class='font-semibold text-stone-900 dark:text-white mt-2'>프론트엔드 업무</h6>
-									{role.subDescription && (
-										<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-1'>
-											{role.subDescription.map((subDesc) => (
-												<li>{subDesc}</li>
-											))}
-										</ul>
-									)}
-								</>
+							{work.task && (
+								<h6 class='font-semibold text-stone-900 dark:text-white mt-2'>{work.task}</h6>
 							)}
 
-							{role.description === '백엔드' && (
-								<>
-									<h6 class='font-semibold text-stone-900 dark:text-white mt-2'>백엔드 업무</h6>
-									{role.subDescription && (
-										<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-1'>
-											{role.subDescription.map((subDesc) => (
-												<li>{subDesc}</li>
-											))}
-										</ul>
-									)}
-								</>
+							{work.description && Array.isArray(work.description) && (
+								<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-2'>
+									{work.description.map((desc) => (
+										<li>{desc}</li>
+									))}
+								</ul>
+							)}
+
+							{work.description && !Array.isArray(work.description) && (
+								<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-1'>
+									<li>{work.description}</li>
+								</ul>
 							)}
 						</div>
 					))}
 				</ul>
 
-				<p class='mt-2 text-gray-600 dark:text-gray-400'>
+				<p class='mt-6 text-gray-600 dark:text-gray-400'>
 					<strong>사용 기술:</strong> {project.techStack.join(', ')}
 				</p>
 			</div>

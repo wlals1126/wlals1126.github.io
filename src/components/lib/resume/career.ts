@@ -21,8 +21,8 @@ export type Project = {
 }
 
 export type Works = {
-	description: string
-	subDescription?: string[]
+	task?: string
+	description?: string | string[]
 }
 
 export type TechStack =
@@ -91,15 +91,15 @@ export const CAREER: Career[] = [
 							'AI-Agent는 사용자의 질문을 이해하고 적절한 답변을 제공하기 위해 설계된 대화형 시스템으로, 다양한 시나리오를 기반으로 사용자 의도를 분석하고 백엔드와 연동하여 데이터를 검색하고 처리하는 자동화된 기능을 구현한 프로젝트입니다.',
 						works: [
 							{
-								description: '프론트엔드',
-								subDescription: [
+								task: '프론트엔드',
+								description: [
 									'내부에서 QA 용도로 쓸 Agent Lab 프론트엔드 개발',
 									'AI Agent API 및 LDAP 연동을 통해 내부 서비스와의 데이터 교환 최적화'
 								]
 							},
 							{
-								description: '백엔드',
-								subDescription: [
+								task: '백엔드',
+								description: [
 									'AI 비서 API 설계 및 기능 개선',
 									'대화 저장 로직 개선 및 DB 테이블 재설계',
 									'AI 비서 기능 개선을 위한 엔드포인트 설계 및 구축',

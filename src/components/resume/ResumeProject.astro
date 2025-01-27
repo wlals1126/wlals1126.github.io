@@ -13,7 +13,7 @@ const { projects }: { projects: Project[] } = Astro.props
 		projects.map((project) => (
 			<div class='mb-6'>
 				<div class='flex justify-between items-center'>
-					<h1 class='font-semibold text-stone-900 dark:text-white'>{project.title}</h1>
+					<h1 class='text-xl font-semibold text-stone-900 dark:text-white'>{project.title}</h1>
 				</div>
 
 				<p class='text-gray-700 dark:text-gray-300 mt-2'>{project.description}</p>

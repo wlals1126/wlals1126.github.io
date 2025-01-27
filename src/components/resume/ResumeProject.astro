@@ -11,18 +11,46 @@ const { projects }: { projects: Project[] } = Astro.props
 <div>
 	{
 		projects.map((project) => (
-			<div class='mb-4'>
-				<h5 class='font-semibold'>{project.title}</h5>
-				<p class='text-gray-600'>
-					{project.beginAt} - {project.endAt || '현재'}
-				</p>
-				<p>{project.description}</p>
-				<ul class='list-disc list-inside mt-2'>
+			<div class='mb-6'>
+				<div class='flex justify-between items-center'>
+					<h1 class='font-semibold text-stone-900 dark:text-white'>{project.title}</h1>
+				</div>
+
+				<p class='text-gray-700 dark:text-gray-300 mt-2'>{project.description}</p>
+
+				<ul class='list-disc list-inside text-gray-600 dark:text-gray-400 mt-2'>
 					{project.role.map((role) => (
-						<li>{role.description}</li>
+						<div>
+							{role.description === '프론트엔드' && (
+								<>
+									<h6 class='font-semibold text-stone-900 dark:text-white mt-2'>프론트엔드 업무</h6>
+									{role.subDescription && (
+										<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-1'>
+											{role.subDescription.map((subDesc) => (
+												<li>{subDesc}</li>
+											))}
+										</ul>
+									)}
+								</>
+							)}
+
+							{role.description === '백엔드' && (
+								<>
+									<h6 class='font-semibold text-stone-900 dark:text-white mt-2'>백엔드 업무</h6>
+									{role.subDescription && (
+										<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-1'>
+											{role.subDescription.map((subDesc) => (
+												<li>{subDesc}</li>
+											))}
+										</ul>
+									)}
+								</>
+							)}
+						</div>
 					))}
 				</ul>
-				<p class='mt-2'>
+
+				<p class='mt-2 text-gray-600 dark:text-gray-400'>
 					<strong>사용 기술:</strong> {project.techStack.join(', ')}
 				</p>
 			</div>

@@ -1,0 +1,44 @@
+---
+import type { Education } from '../lib/resume/education'
+
+type Props = {
+  education: Education[]
+}
+
+const { education }: { education: Education[] } = Astro.props
+---
+
+<section class='mb-10'>
+  <hr class='border-t border-gray-300 dark:border-gray-600 my-4' />
+  <ul class='mt-4'>
+    {
+      education.map((item) => (
+        <li class='mb-4'>
+          <div class='grid grid-cols-3 gap-4'>
+            <div class='col-span-1'>
+              <p class='text-2xl font-semibold'>학력</p>
+            </div>
+
+            <div class='col-span-2'>
+              <div class='flex justify-between items-center'>
+                <p class='text-xl font-semibold'>{item.school}</p>
+                <p class='text-gray-600 dark:text-gray-400'>
+                  {item.beginAt} ~ {item.endAt}
+                </p>
+              </div>
+              <p class='text-gray-600 dark:text-gray-400 mt-2'>
+                {item.major}
+              </p>
+
+              <ul class='list-disc pl-6 text-gray-600 dark:text-gray-400 mt-4'>
+                {item.courses.map((course) => (
+                  <li>{course}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

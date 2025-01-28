@@ -1,0 +1,50 @@
+---
+import ResumeProject from './ResumeProject.astro'
+import type { Career } from '../lib/resume/career'
+
+type Props = {
+	career: Career[]
+}
+
+const { career }: { career: Career[] } = Astro.props
+---
+
+<section>
+	<hr class='border-t border-gray-300 dark:border-gray-600 my-4' />
+	{
+		career.map((company) => (
+			<div>
+				<div class='grid grid-cols-3 gap-4'>
+					<div class='col-span-1'>
+						<h3 class='text-2xl font-bold text-stone-900 dark:text-white'>업무 경험</h3>
+					</div>
+
+					<div class='col-span-2'>
+						<div class="flex justify-between items-center">
+							<h4 class='text-xl font-semibold text-stone-900 dark:text-white'>
+								{company.companyName}
+							</h4>
+							<p class='text-gray-600 dark:text-gray-400'>
+								{company.beginAt} ~ {company.endAt || '재직 중'}
+							</p>
+						</div>
+
+						<div class='flex justify-between text-gray-600 dark:text-gray-300 mt-2'>
+							<div>
+								{company.team.map((team) => (
+									<p>
+										{team.teamName} - {team.position}
+									</p>
+								))}
+							</div>
+						</div>
+
+						<div class='mt-4'>
+							<ResumeProject projects={company.team.flatMap((team) => team.projects)} />
+						</div>
+					</div>
+				</div>
+			</div>
+		))
+	}
+</section>

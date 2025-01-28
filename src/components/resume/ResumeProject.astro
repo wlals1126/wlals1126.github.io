@@ -1,0 +1,51 @@
+---
+import type { Project } from '../lib/resume/career'
+
+type Props = {
+	projects: Project[]
+}
+
+const { projects }: { projects: Project[] } = Astro.props
+---
+
+<div>
+	{
+		projects.map((project) => (
+			<div class='mb-6'>
+				<div class='flex justify-between items-center'>
+					<h1 class='text-xl font-semibold text-stone-900 dark:text-white'>{project.title}</h1>
+				</div>
+
+				<p class='text-gray-700 dark:text-gray-300 mt-2'>{project.description}</p>
+
+				<ul class='list-disc list-inside text-gray-600 dark:text-gray-400 mt-2'>
+					{project.works.map((work) => (
+						<div>
+							{work.task && (
+								<h6 class='font-semibold text-stone-900 dark:text-white mt-2'>{work.task}</h6>
+							)}
+
+							{work.description && Array.isArray(work.description) && (
+								<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-2'>
+									{work.description.map((desc) => (
+										<li>{desc}</li>
+									))}
+								</ul>
+							)}
+
+							{work.description && !Array.isArray(work.description) && (
+								<ul class='list-inside list-disc text-gray-600 dark:text-gray-400 mt-1'>
+									<li>{work.description}</li>
+								</ul>
+							)}
+						</div>
+					))}
+				</ul>
+
+				<p class='mt-6 text-gray-600 dark:text-gray-400'>
+					<strong>사용 기술:</strong> {project.techStack.join(', ')}
+				</p>
+			</div>
+		))
+	}
+</div>

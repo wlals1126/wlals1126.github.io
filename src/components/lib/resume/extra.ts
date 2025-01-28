@@ -5,6 +5,7 @@ export type Extra = {
 	beginAt: `${number}.${number}`
 	endAt: `${number}.${number}`
 	summary: string
+	link: string
 	works?: Works[]
 	techStack?: TechStack[]
 }
@@ -18,7 +19,8 @@ export const EXTRA: Extra[] = [
 		projectName: 'DEE:P',
 		beginAt: '2023.10',
 		endAt: '2024.04',
-		summary: 'NFC를 활용한 간편한 명함 공유 서비스',
+		summary: 'NFC를 활용한 간편한 명함 공유',
+		link: 'https://github.com/Project-DEE-P/DEEP-FrontEnd',
 		works: [
 			{
 				description: '서비스 기획 및 UI/UX 디자인'

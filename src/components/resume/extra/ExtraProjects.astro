@@ -1,47 +1,57 @@
 ---
-import type { Extra } from "src/components/lib/resume/extra";
+import type { Extra } from 'src/components/lib/resume/extra'
 
 type Props = {
-    extra: Extra[];
+	extra: Extra[]
 }
 
-const { extra }: { extra: Extra[] } = Astro.props;
+const { extra }: { extra: Extra[] } = Astro.props
 ---
 
 <section>
-	<hr class="border-t border-gray-300 dark:border-gray-600 my-4" />
+	<hr class='border-t border-gray-300 dark:border-gray-600 my-4' />
 	{
 		extra.map((project) => (
 			<div>
-				<div class="grid grid-cols-3 gap-4">
-					<div class="col-span-1">
-						<h3 class="text-2xl font-bold text-stone-900 dark:text-white">프로젝트</h3>
+				<div class='grid grid-cols-3 gap-4'>
+					<div class='col-span-1'>
+						<h3 class='text-2xl font-bold text-stone-900 dark:text-white'>프로젝트</h3>
 					</div>
 
-					<div class="col-span-2">
-						<div class="flex justify-between items-center">
-							<h4 class="text-xl font-semibold text-stone-900 dark:text-white">
+					<div class='col-span-2'>
+						<div class='flex justify-between items-center'>
+							<h4 class='text-xl font-semibold text-stone-900 dark:text-white'>
 								{project.projectName}
 							</h4>
-							<p class="text-gray-600 dark:text-gray-400">
+							<p class='text-gray-600 dark:text-gray-400'>
 								{project.beginAt} ~ {project.endAt}
 							</p>
 						</div>
 
-						<p class="text-gray-600 dark:text-gray-300 mt-2">{project.summary}</p>
+						<p class='text-gray-600 dark:text-gray-300 mt-2'>
+							{project.summary}{' '}
+							{project.link && (
+								<a
+									href={project.link}
+									target='_blank'
+									rel='noopener noreferrer'
+									class='text-blue-500 hover:underline'
+								>
+									서비스
+								</a>
+							)}
+						</p>
 
-						<div class="mt-4">
-							<ul class="list-disc pl-5 space-y-1">
+						<div class='mt-4'>
+							<ul class='list-disc pl-5 space-y-1'>
 								{project.works?.map((work) => (
-									<li class="text-gray-700 dark:text-gray-300">
-										{work.description}
-									</li>
+									<li class='text-gray-700 dark:text-gray-300'>{work.description}</li>
 								))}
 							</ul>
 						</div>
 
 						{project.techStack && (
-							<p class="mt-6 text-gray-600 dark:text-gray-400">
+							<p class='mt-6 text-gray-600 dark:text-gray-400'>
 								<strong>사용 기술:</strong> {project.techStack.join(', ')}
 							</p>
 						)}

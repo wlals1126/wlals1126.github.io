@@ -6,10 +6,13 @@ import ResumeCareer from '@/components/resume/ResumeCareer'
 
 import { EDUCATION } from 'src/components/lib/resume/education'
 import { CAREER } from 'src/components/lib/resume/career'
+import ExtraProjects from '@/components/resume/extra/ExtraProjects'
+import { EXTRA } from 'src/components/lib/resume/extra'
 ---
 
 <ResumeLayout title='Resume'>
-  <ResumeHeader name='안녕하세요, 유지민입니다.' />
+  <ResumeHeader name='유지민' />
   <ResumeCareer career={CAREER} />
+  <ExtraProjects extra={EXTRA} />
   <ResumeEducation education={EDUCATION} />
 </ResumeLayout>

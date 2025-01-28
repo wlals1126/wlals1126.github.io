@@ -31,6 +31,7 @@ export type TechStack =
 	| 'Typescript'
 	| 'styled-components'
 	| 'Tailwind CSS'
+	| 'Recoil'
 	| 'Redux'
 	| 'Redux Toolkit'
 	| 'Redux Saga'
@@ -107,7 +108,14 @@ export const CAREER: Career[] = [
 								]
 							}
 						],
-						techStack: ['Next.js', 'Tailwind CSS', 'TanStack Query']
+						techStack: [
+							'Next.js',
+							'Typescript',
+							'Spring',
+							'Kotlin',
+							'Tailwind CSS',
+							'TanStack Query'
+						]
 					}
 				]
 			}

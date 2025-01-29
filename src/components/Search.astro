@@ -45,8 +45,11 @@ import SearchIcon from '@/components/icons/SearchIcon'
 			const dialog = this.querySelector('dialog')!
 			const dialogFrame = this.querySelector('.dialog-frame')!
 
+			if (!openBtn || !closeBtn || !dialog || !dialogFrame) {
+				return;
+			}
+
 			const onWindowClick = (event: MouseEvent) => {
-				// make sure the click is outside the of the dialog
 				if (
 					document.body.contains(event.target as Node) &&
 					!dialogFrame.contains(event.target as Node)
@@ -65,7 +68,7 @@ import SearchIcon from '@/components/icons/SearchIcon'
 				animate(
 					'dialog',
 					{
-						clipPath: [
+						clipPath: [ 
 							'polygon(0 0, 100% 0, 100% -200%, -200% -200%)',
 							'polygon(0 0, 100% 0, 100% 100%, 0% 100%)'
 						],
@@ -92,7 +95,6 @@ import SearchIcon from '@/components/icons/SearchIcon'
 			closeBtn.addEventListener('click', closeModal)
 			document.addEventListener('astro:after-swap', closeModal)
 
-			// Listen for `/` keyboard shortcut
 			window.addEventListener('keydown', (e) => {
 				if (e.key === '/' && !dialog.open) {
 					openModal()

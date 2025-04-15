@@ -1,13 +1,16 @@
 ---
-title: '네비게이션이 환경에 따라 달라진다고?'
-description: '환경(dev/prod)에 따라 경로 구조가 달라지는 문제를 해결하는 커스텀 훅'
-pubDate: 'Mar 18 2025'
-heroImage: '../../assets/images/갈림길.png'
-category: 'Development'
-tags: ['React', 'React Router', 'Custom Hook']
+heroImage: ../../assets/images/갈림길.png
+category: Development
+description: 환경(dev/prod)에 따라 경로 구조가 달라지는 문제를 해결하는 커스텀 훅
+pubDate: 2025-03-17T15:00:00.000Z
+tags:
+  - React
+  - React Router
+  - Custom Hook
+title: 네비게이션이 환경에 따라 달라진다고?
 ---
 
-React 프로젝트에서 `react-router-dom`의 `navigate`를 사용하여 페이지 이동을 구현할 때, 환경(dev/prod)에 따라 경로 구조가 달라지는 문제가 발생할 수 있다. 
+React 프로젝트에서 `react-router-dom`의 `navigate`를 사용하여 페이지 이동을 구현할 때, 환경(dev/prod)에 따라 경로 구조가 달라지는 문제가 발생할 수 있다.
 이를 해결하기 위해 커스텀 네비게이션 훅을 만들게 되었고, 그 과정과 장점을 정리해보려 한다.
 
 ## 기존 네비게이션의 문제점
@@ -16,23 +19,26 @@ React 프로젝트에서 `react-router-dom`의 `navigate`를 사용하여 페이
 
 ### 1. 환경별 경로 차이
 
-- 로컬 개발 환경에서는 `/dashboard/view/id` 형태로 동작함
-- 배포 환경(dev/prod)에서는 `/app/dashboard/view/id` 형태로 동작함
-- 기본 `navigate` 사용 시 환경에 따른 경로 차이를 반영할 수 없음
+* 로컬 개발 환경에서는 `/dashboard/view/id` 형태로 동작함
+* 배포 환경(dev/prod)에서는 `/app/dashboard/view/id` 형태로 동작함
+* 기본 `navigate` 사용 시 환경에 따른 경로 차이를 반영할 수 없음
 
 ### 2. 일관되지 않은 동작
-- 로컬에서는 정상적으로 이동하지만, 배포 환경에서는 원하는 경로로 이동하지 않음
-- 개발자가 환경별로 조건문을 추가해야 하는 번거로움이 발생함
+
+* 로컬에서는 정상적으로 이동하지만, 배포 환경에서는 원하는 경로로 이동하지 않음
+* 개발자가 환경별로 조건문을 추가해야 하는 번거로움이 발생함
 
 ## 커스텀 네비게이션을 만든 이유
+
 이 문제를 해결하기 위해 `useNavigate`를 감싸는 커스텀 네비게이션 훅을 만들었다.
-- 환경별로 다른 네비게이션 경로를 자동으로 처리할 필요가 있음
-- 개발자가 환경을 신경 쓰지 않고 일관된 방식으로 페이지 이동을 할 수 있도록 함
-- 유지보수성을 높이고, 경로 변경 시에도 최소한의 수정으로 대응할 수 있도록 함
+
+* 환경별로 다른 네비게이션 경로를 자동으로 처리할 필요가 있음
+* 개발자가 환경을 신경 쓰지 않고 일관된 방식으로 페이지 이동을 할 수 있도록 함
+* 유지보수성을 높이고, 경로 변경 시에도 최소한의 수정으로 대응할 수 있도록 함
 
 `useNavigate`를 감싸는 `useCustomNavigate` 훅을 만들어 환경별로 경로를 자동 변환하도록 했다.
 
-```tsx
+```typescript
 import type { NavigateOptions, To } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -65,37 +71,43 @@ export function useCustomNavigate() {
 
 ### 커스텀 네비게이션 훅의 동작 방식
 
-- `getRuntimeConfig().isLocal` 값을 통해 현재 환경이 로컬인지 판별
-- 로컬 환경이면 경로를 그대로 사용하고, 배포 환경이면 getRuntimeConfig().basePath를 prefix로 추가
-- `navigate` 호출 시, 숫자일 경우 기존 방식 유지, 문자열/객체일 경우 환경에 맞는 경로로 변환
+* `getRuntimeConfig().isLocal` 값을 통해 현재 환경이 로컬인지 판별
+* 로컬 환경이면 경로를 그대로 사용하고, 배포 환경이면 getRuntimeConfig().basePath를 prefix로 추가
+* `navigate` 호출 시, 숫자일 경우 기존 방식 유지, 문자열/객체일 경우 환경에 맞는 경로로 변환
 
 ## 고민 아닌 고민
 
 ### 1. react-router-dom 내부 동작 분석
-처음에는 `navigate`를 직접 감싸서 경로를 변환하는 방식이 쉽게 느껴졌지만, `react-router-dom`이 내부적으로 경로를 처리하는 방식이 생각보다 복잡했다. 
+
+처음에는 `navigate`를 직접 감싸서 경로를 변환하는 방식이 쉽게 느껴졌지만, `react-router-dom`이 내부적으로 경로를 처리하는 방식이 생각보다 복잡했다.
 특히 `navigate` 함수가 `string`뿐만 아니라 `object` 형태도 받을 수 있다는 점에서, 이를 유연하게 처리할 필요가 있었다.
 
 ### 2. 환경 변수 관리
-환경별로 다른 경로 구조를 적용하기 위해 `getRuntimeConfig()`를 사용했지만, 이를 어디서 가져올지 고민이 필요했다. 
+
+환경별로 다른 경로 구조를 적용하기 위해 `getRuntimeConfig()`를 사용했지만, 이를 어디서 가져올지 고민이 필요했다.
 결국, 프로젝트의 `runtimeConfig`를 활용하여 유동적으로 환경을 감지하도록 설계했다.
 
 ### 3. 기존 코드와의 호환성
-기존 코드에서는 `navigate('/dashboard/view/id')`와 같이 사용되고 있었는데, 이를 커스텀 훅으로 변경할 때 최소한의 코드 수정만으로 적용할 수 있도록 
+
+기존 코드에서는 `navigate('/dashboard/view/id')`와 같이 사용되고 있었는데, 이를 커스텀 훅으로 변경할 때 최소한의 코드 수정만으로 적용할 수 있도록
 인터페이스를 동일하게 유지하는 것이 중요했다.
 
 ## 장점은?
 
 ### 1. 환경별 경로 차이를 자동으로 처리
-- 개발자가 환경을 고려하지 않고도 동일한 방식으로 `useCustomNavigate('/view')` 사용 가능
-- 환경이 변경되더라도 네비게이션 경로가 자동으로 조정됨
+
+* 개발자가 환경을 고려하지 않고도 동일한 방식으로 `useCustomNavigate('/view')` 사용 가능
+* 환경이 변경되더라도 네비게이션 경로가 자동으로 조정됨
 
 ### 2. 유지보수 용이
-- 환경별 경로 변경 시, `useCustomNavigate` 내부만 수정하면 전체 코드 수정 없이 적용 가능
-- 새로운 환경이 추가되더라도 별도의 수정 없이 `getRuntimeConfig`에서 처리 가능
+
+* 환경별 경로 변경 시, `useCustomNavigate` 내부만 수정하면 전체 코드 수정 없이 적용 가능
+* 새로운 환경이 추가되더라도 별도의 수정 없이 `getRuntimeConfig`에서 처리 가능
 
 ### 3. 가독성과 일관성 유지
-- 코드 내에서 환경별 분기 처리를 하지 않아도 되어 깔끔해짐
-- 네비게이션 관련 로직을 한 곳에서 관리할 수 있어 유지보수가 쉬워짐
 
-이번 경험을 통해 환경별 네비게이션 경로 차이를 효율적으로 해결할 수 있는 방법에 대해 고민할 수 있었습니다. 단순히 `navigate` 함수를 감싸는 것에 그치지 않고, 
+* 코드 내에서 환경별 분기 처리를 하지 않아도 되어 깔끔해짐
+* 네비게이션 관련 로직을 한 곳에서 관리할 수 있어 유지보수가 쉬워짐
+
+이번 경험을 통해 환경별 네비게이션 경로 차이를 효율적으로 해결할 수 있는 방법에 대해 고민할 수 있었습니다. 단순히 `navigate` 함수를 감싸는 것에 그치지 않고,
 `react-router-dom`의 내부 동작을 분석하고, 기존 코드와의 호환성을 고려하며 유지보수가 용이한 구조를 설계하는 것이 중요하다는 점을 다시 한 번 깨달았습니다.

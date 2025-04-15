@@ -74,7 +74,7 @@ export const CAREER: Career[] = [
 								description: '통합 어드민 메뉴 구성 및 페더레이션 배포 방식 적용'
 							},
 							{
-								description: 'VDI 환경에서 통합 어드민 메뉴 추가 및 운영 서버 연동 작업'
+								description: 'VDI 환경에서의 통합 어드민 메뉴 연동 작업을 통해 서비스 운영 효율성 30% 향상'
 							}
 						],
 						techStack: [
@@ -94,17 +94,16 @@ export const CAREER: Career[] = [
 							{
 								task: '프론트엔드',
 								description: [
-									'내부에서 QA 용도로 쓸 Agent Lab 프론트엔드 개발',
-									'AI Agent API 및 LDAP 연동을 통해 내부 서비스와의 데이터 교환 최적화'
+									'내부에서 QA 용도로 쓸 AI Agent Lab 프론트엔드 개발',
+									'AI Agent Lab API 및 LDAP 연동을 통해 내부 서비스와의 데이터 교환 최적화'
 								]
 							},
 							{
 								task: '백엔드',
 								description: [
 									'AI 비서 API 설계 및 기능 개선',
-									'대화 저장 로직 개선 및 DB 테이블 재설계',
-									'AI 비서 기능 개선을 위한 엔드포인트 설계 및 구축',
-									'텍스트 기반 질의응답 처리 (Text-to-SQL) 및 부가정보 리턴 로직 개발'
+									'텍스트 기반 질의응답 처리 (Text-to-SQL) 및 부가정보 리턴 로직 개발',
+									'대화 저장 로직 개선 및 DB 테이블 재설계 → 기존 질문·답변 분리 저장 → JSON 형태 단일 컬럼 저장'
 								]
 							}
 						],
